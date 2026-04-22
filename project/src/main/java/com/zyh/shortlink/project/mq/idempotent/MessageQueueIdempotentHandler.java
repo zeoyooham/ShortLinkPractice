@@ -18,22 +18,22 @@ public class MessageQueueIdempotentHandler {
 
     private static final String IDEMPOTENT_KEY_PREFIX = "short-link:idempotent:";
 
-    private Boolean isMessageBeingConsumed(String id){
+    public Boolean isMessageBeingConsumed(String id){
         String key= IDEMPOTENT_KEY_PREFIX + id;
         return Boolean.FALSE.equals(stringRedisTemplate.opsForValue().setIfAbsent(key, "0",2, TimeUnit.MINUTES));
     }
 
-    private Boolean isAccomplish(String id){
+    public Boolean isAccomplish(String id){
         String key= IDEMPOTENT_KEY_PREFIX + id;
         return Objects.equals(stringRedisTemplate.opsForValue().get(key), "1");
     }
 
-    private void setAccomplish(String id){
+    public void setAccomplish(String id){
         String key= IDEMPOTENT_KEY_PREFIX + id;
         stringRedisTemplate.opsForValue().set(key, "1");
     }
 
-    private void delMessageProcessed(String id){
+    public void delMessageProcessed(String id){
         String key= IDEMPOTENT_KEY_PREFIX + id;
         stringRedisTemplate.delete(key);
     }
