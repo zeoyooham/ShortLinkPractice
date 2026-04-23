@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ShortLinkMapper extends BaseMapper<ShortLinkDO> {
 
-    void incrementsStats(@Param("gid") String gid,
+    void incrementStats(@Param("gid") String gid,
                          @Param("fullShortUrl") String fullShortUrl,
                          @Param("totalPv") Integer totalPv,
                          @Param("totalUv") Integer totalUv,
